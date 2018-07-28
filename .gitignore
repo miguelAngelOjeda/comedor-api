@@ -1,0 +1,4 @@
+*.class
+ComedorService-ejb/target/
+ComedorService-web/target/
+ComedorService-ear/target/
