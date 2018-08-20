@@ -1,6 +1,7 @@
 package py.com.coomecipar.service.web.spring;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -11,6 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import py.com.coomecipar.service.web.jwt.JWTAuthenticationEntryPoint;
+import py.com.coomecipar.service.web.jwt.JWTAuthenticationFilter;
+import py.com.coomecipar.service.web.jwt.JWTLoginFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -18,7 +23,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"py.com.coomecipar.service.web.**"})
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-   
+    @Autowired
+    private JWTAuthenticationEntryPoint unauthorizedHandler;
 
     @Bean
     public UserSession userSession() {
@@ -31,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Disable CSRF protection since tokens are immune to it
                 .csrf().disable()
                 // If the user is not authenticated, returns 401
-                //.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 // This is a stateless application, disable sessions
                 .sessionManagement()
 //                .maximumSessions(1)
@@ -42,15 +48,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Allow anonymous access to "/" path
                 .antMatchers("/").permitAll()
                 // Allow anonymous access to "/login" (only POST requests)
-                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .antMatchers(HttpMethod.POST, "login").permitAll()
                 .antMatchers("/servicios/**").permitAll()
+                .antMatchers("/mensaje/**").permitAll()
+                .antMatchers("/mensaje/recibido/**").permitAll()
                 .antMatchers("/updateauth/token").permitAll()
                 // Any other request must be authenticated
                 .anyRequest().authenticated().and()
                 // Custom filter for logging in users at "/login"
-                //.addFilterBefore(new JWTLoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
                 // Custom filter for authenticating users using tokens
-                //.addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 // Disable resource caching
                 .headers().cacheControl();
     }

@@ -1,9 +1,13 @@
 package py.com.coomecipar.service.web.spring;
 
 
+
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
@@ -11,13 +15,15 @@ import org.springframework.security.authentication.AccountStatusUserDetailsCheck
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import py.com.coomecipar.service.ejb.entity.Usuario;
+import py.com.coomecipar.service.ejb.manager.UsuarioManager;
 
 
 @Service("userDetailsService")
 public class UserDetailService implements UserDetailsService {
 
     private Context context;
-//    private UsuarioManager usuarioManager;
+    private UsuarioManager usuarioManager;
 //    protected FuncionariosManager funcionariosManager;
 
     private final AccountStatusUserDetailsChecker detailsChecker = new AccountStatusUserDetailsChecker();
@@ -28,31 +34,30 @@ public class UserDetailService implements UserDetailsService {
     public User loadUserByUsername(String idUser) throws UsernameNotFoundException {
         User user = new User();
         try {
+            inicializarUsuarioManager();
         } catch (Exception ex) {
             Logger.getLogger(UserDetailService.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-//        Personas ejPersona = new Personas();
-//        ejPersona.setIdentificador(Integer.parseInt(idUser));
-//
-//        Funcionarios ejFuncionarios = new Funcionarios();
-//        ejFuncionarios.setIdPersona(ejPersona);
-//        // Fetch the account corresponding to the given username
-//        ejFuncionarios = funcionariosManager.get(ejFuncionarios);
-//
-//        // If the account doesn't exist
-//        if (ejFuncionarios == null) {
-//            throw new UsernameNotFoundException("User not found");
-//        }
+        Usuario ejPersona = new Usuario();
+        ejPersona.setId(Long.parseLong(idUser));
+
+        // Fetch the account corresponding to the given username
+        ejPersona = usuarioManager.get(ejPersona);
+
+        // If the account doesn't exist
+        if (ejPersona == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
         
-//        user.setNombre(ejFuncionarios.getIdPersona().getPrimerNombre());
-//        user.setApellido(ejFuncionarios.getIdPersona().getPrimerApellido());
-//        user.setEmail(idUser);
-//        user.setNombreRol(idUser);
-//        user.setId(Long.parseLong(ejFuncionarios.getIdPersona().getIdentificador()+""));
-//        user.setRol(idUser);
-//        user.setUsername(ejFuncionarios.getNombreUsuario());
-//        user.setAuthorities(Collections.EMPTY_LIST);
+        user.setNombre(ejPersona.getNombre());
+        user.setApellido(ejPersona.getApellido());
+        user.setEmail(ejPersona.getEmail());
+        user.setNombreRol(ejPersona.getRol().getNombre());
+        user.setId(ejPersona.getId());
+        user.setRol(ejPersona.getRol().getId()+"");
+        user.setUsername(ejPersona.getUsername());
+        user.setAuthorities(Collections.EMPTY_LIST);
 
         detailsChecker.check(user);
 
@@ -60,6 +65,22 @@ public class UserDetailService implements UserDetailsService {
 
     }
 
-   
+    protected void inicializarUsuarioManager() throws Exception {
+        if (context == null) {
+            try {
+                context = new InitialContext();
+            } catch (NamingException e1) {
+                throw new RuntimeException("No se puede inicializar el contexto", e1);
+            }
+        }
+        if (usuarioManager == null) {
+            try {
+
+                usuarioManager = (UsuarioManager) context.lookup("java:app/ComedorService-ejb/UsuarioManagerImpl");
+            } catch (NamingException ne) {
+                throw new RuntimeException("No se encuentra EJB valor Manager: ", ne);
+            }
+        }
+    }
 
 }

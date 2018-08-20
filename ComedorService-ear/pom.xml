@@ -54,7 +54,7 @@
                         <webModule>
                             <groupId>py.com.coomecipar</groupId>
                             <artifactId>ComedorService-web</artifactId>
-                            <contextRoot>comedor</contextRoot>
+                            <contextRoot>api/v1</contextRoot>
                         </webModule>
                     </modules>
                     <fileNameMapping>no-version</fileNameMapping>

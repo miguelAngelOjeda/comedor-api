@@ -10,7 +10,6 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
 /**
  *
  * @author Miguel
@@ -151,7 +150,7 @@ public class User implements UserDetails {
     }
 
     /**
-     * Regresa el identificador Ãºnico de un usuario.
+     * Regresa el identificador único de un usuario.
      * @return 
      */
     @Override
@@ -160,7 +159,7 @@ public class User implements UserDetails {
     }
 
     /**
-     * Establece el identificador Ãºnico de un usuario.
+     * Establece el identificador único de un usuario.
      *
      * @param username
      */
@@ -214,6 +213,11 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    //@Override
+    public String getName() {
+        return nombre; //To change body of generated methods, choose Tools | Templates.
     }
     
 }
