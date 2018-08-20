@@ -15,15 +15,15 @@ import org.springframework.security.authentication.AccountStatusUserDetailsCheck
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import py.com.coomecipar.service.ejb.entity.Usuario;
-import py.com.coomecipar.service.ejb.manager.UsuarioManager;
+import py.com.coomecipar.service.ejb.entity.UsuarioMensaje;
+import py.com.coomecipar.service.ejb.manager.UsuarioMensajeManager;
 
 
 @Service("userDetailsService")
 public class UserDetailService implements UserDetailsService {
 
     private Context context;
-    private UsuarioManager usuarioManager;
+    private UsuarioMensajeManager usuarioManager;
 //    protected FuncionariosManager funcionariosManager;
 
     private final AccountStatusUserDetailsChecker detailsChecker = new AccountStatusUserDetailsChecker();
@@ -39,7 +39,7 @@ public class UserDetailService implements UserDetailsService {
             Logger.getLogger(UserDetailService.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Usuario ejPersona = new Usuario();
+        UsuarioMensaje ejPersona = new UsuarioMensaje();
         ejPersona.setId(Long.parseLong(idUser));
 
         // Fetch the account corresponding to the given username
@@ -53,9 +53,9 @@ public class UserDetailService implements UserDetailsService {
         user.setNombre(ejPersona.getNombre());
         user.setApellido(ejPersona.getApellido());
         user.setEmail(ejPersona.getEmail());
-        user.setNombreRol(ejPersona.getRol().getNombre());
+        //user.setNombreRol(ejPersona.getRol().getNombre());
         user.setId(ejPersona.getId());
-        user.setRol(ejPersona.getRol().getId()+"");
+        //user.setRol(ejPersona.getRol().getId()+"");
         user.setUsername(ejPersona.getUsername());
         user.setAuthorities(Collections.EMPTY_LIST);
 
@@ -76,7 +76,7 @@ public class UserDetailService implements UserDetailsService {
         if (usuarioManager == null) {
             try {
 
-                usuarioManager = (UsuarioManager) context.lookup("java:app/ComedorService-ejb/UsuarioManagerImpl");
+                usuarioManager = (UsuarioMensajeManager) context.lookup("java:app/ComedorService-ejb/UsuarioMensajeManagerImpl");
             } catch (NamingException ne) {
                 throw new RuntimeException("No se encuentra EJB valor Manager: ", ne);
             }

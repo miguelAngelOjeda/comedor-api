@@ -18,9 +18,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import py.com.coomecipar.service.ejb.entity.AutenticacionTokens;
-import py.com.coomecipar.service.ejb.entity.Usuario;
+import py.com.coomecipar.service.ejb.entity.UsuarioMensaje;
 import py.com.coomecipar.service.ejb.manager.TokenAuthenticationManager;
-import py.com.coomecipar.service.ejb.manager.UsuarioManager;
+import py.com.coomecipar.service.ejb.manager.UsuarioMensajeManager;
 
 
 /**
@@ -32,7 +32,7 @@ public class UserSession implements AuthenticationProvider {
     private Context context;
 
     protected TokenAuthenticationManager tokenAuthentication;
-    protected UsuarioManager usuarioManager;
+    protected UsuarioMensajeManager usuarioManager;
     
     static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(UserSession.class.getName());
 
@@ -47,7 +47,7 @@ public class UserSession implements AuthenticationProvider {
             String userLogin = authentication.getPrincipal().toString();
             String passwordLogin = authentication.getCredentials().toString();
 
-            Usuario usuario = usuarioManager.findByUserPass(userLogin, passwordLogin);
+            UsuarioMensaje usuario = usuarioManager.findByUserPass(userLogin, passwordLogin);
 
             if (usuario != null) {
                 
@@ -118,7 +118,7 @@ public class UserSession implements AuthenticationProvider {
         if (usuarioManager == null) {
             try {
 
-                usuarioManager = (UsuarioManager) context.lookup("java:app/ComedorService-ejb/UsuarioManagerImpl");
+                usuarioManager = (UsuarioMensajeManager) context.lookup("java:app/ComedorService-ejb/UsuarioMensajeManagerImpl");
             } catch (NamingException ne) {
                 throw new RuntimeException("No se encuentra EJB valor Manager: ", ne);
             }

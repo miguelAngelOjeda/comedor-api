@@ -18,7 +18,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.naming.Context;
 import org.slf4j.LoggerFactory;
-import py.com.coomecipar.service.ejb.entity.Usuario;
+import py.com.coomecipar.service.ejb.entity.UsuarioMensaje;
 import py.com.coomecipar.service.web.jwtService.TokenAuthenticationService;
 import py.com.coomecipar.service.web.jwtService.TokenAuthenticationServiceImpl;
 
@@ -38,7 +38,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException, IOException, ServletException {
         // Retrieve username and password from the http request and save them in an Account object.
-        Usuario account = new ObjectMapper().readValue(req.getInputStream(), Usuario.class);
+        UsuarioMensaje account = new ObjectMapper().readValue(req.getInputStream(), UsuarioMensaje.class);
 
         // Verify if the correctness of login details.
         // If correct, the successfulAuthentication() method is executed.

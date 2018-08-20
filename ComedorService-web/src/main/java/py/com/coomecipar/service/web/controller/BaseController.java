@@ -15,11 +15,12 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.springframework.stereotype.Controller;
 import py.com.coomecipar.service.ejb.manager.MensajeManager;
-import py.com.coomecipar.service.ejb.manager.PermisoManager;
-import py.com.coomecipar.service.ejb.manager.RolManager;
-import py.com.coomecipar.service.ejb.manager.RolPermisoManager;
-import py.com.coomecipar.service.ejb.manager.TokenAuthenticationManager;
-import py.com.coomecipar.service.ejb.manager.UsuarioManager;
+import py.com.coomecipar.service.ejb.manager.UsuarioMensajeManager;
+//import py.com.coomecipar.service.ejb.manager.PermisoManager;
+//import py.com.coomecipar.service.ejb.manager.RolManager;
+//import py.com.coomecipar.service.ejb.manager.RolPermisoManager;
+//import py.com.coomecipar.service.ejb.manager.TokenAuthenticationManager;
+//import py.com.coomecipar.service.ejb.manager.UsuarioManager;
 
 
 /**
@@ -37,11 +38,11 @@ public class BaseController {
     protected static final DecimalFormat numFormat = new DecimalFormat("#,###,###");
      
     
-    protected TokenAuthenticationManager tokenAuthenticationManager;
-    protected UsuarioManager usuarioManager;
-    protected RolManager rolManager;
-    protected PermisoManager permisoManager;
-    protected RolPermisoManager rolPermisoManager;
+//    protected TokenAuthenticationManager tokenAuthenticationManager;
+    protected UsuarioMensajeManager usuarioManager;
+//    protected RolManager rolManager;
+//    protected PermisoManager permisoManager;
+//    protected RolPermisoManager rolPermisoManager;
     protected MensajeManager mensajeManager;
     
     
@@ -64,23 +65,23 @@ public class BaseController {
     }
     
     
-    protected void inicializarTokensManager() throws Exception {
-        if (context == null) {
-            try {
-                context = new InitialContext();
-            } catch (NamingException e1) {
-                throw new RuntimeException("No se puede inicializar el contexto", e1);
-            }
-        }
-        if (tokenAuthenticationManager == null) {
-            try {
-
-                tokenAuthenticationManager = (TokenAuthenticationManager) context.lookup("java:app/ComedorService-ejb/TokenAuthenticationManagerImpl");
-            } catch (NamingException ne) {
-                throw new RuntimeException("No se encuentra EJB valor Manager: ", ne);
-            }
-        }
-    }
+//    protected void inicializarTokensManager() throws Exception {
+//        if (context == null) {
+//            try {
+//                context = new InitialContext();
+//            } catch (NamingException e1) {
+//                throw new RuntimeException("No se puede inicializar el contexto", e1);
+//            }
+//        }
+//        if (tokenAuthenticationManager == null) {
+//            try {
+//
+//                tokenAuthenticationManager = (TokenAuthenticationManager) context.lookup("java:app/ComedorService-ejb/TokenAuthenticationManagerImpl");
+//            } catch (NamingException ne) {
+//                throw new RuntimeException("No se encuentra EJB valor Manager: ", ne);
+//            }
+//        }
+//    }
     
     protected void inicializarUsuarioManager() throws Exception {
         if (context == null) {
@@ -93,7 +94,7 @@ public class BaseController {
         if (usuarioManager == null) {
             try {
 
-                usuarioManager = (UsuarioManager) context.lookup("java:app/ComedorService-ejb/UsuarioManagerImpl");
+                usuarioManager = (UsuarioMensajeManager) context.lookup("java:app/ComedorService-ejb/UsuarioMensajeManagerImpl");
             } catch (NamingException ne) {
                 throw new RuntimeException("No se encuentra EJB valor Manager: ", ne);
             }
@@ -101,60 +102,60 @@ public class BaseController {
     }
 
 
-    protected void inicializarRolManager() throws Exception {
-        if (context == null) {
-            try {
-                context = new InitialContext();
-            } catch (NamingException e1) {
-                throw new RuntimeException("No se puede inicializar el contexto", e1);
-            }
-        }
-        if (rolManager == null) {
-            try {
-
-                rolManager = (RolManager) context.lookup("java:app/ComedorService-ejb/RolManagerImpl");
-            } catch (NamingException ne) {
-                throw new RuntimeException("No se encuentra EJB valor Manager: ", ne);
-            }
-        }
-    }
-
-    protected void inicializarPermisoManager() throws Exception {
-        if (context == null) {
-            try {
-                context = new InitialContext();
-            } catch (NamingException e1) {
-                throw new RuntimeException("No se puede inicializar el contexto", e1);
-            }
-        }
-        if (permisoManager == null) {
-            try {
-
-                permisoManager = (PermisoManager) context.lookup("java:app/ComedorService-ejb/PermisoManagerImpl");
-            } catch (NamingException ne) {
-                throw new RuntimeException("No se encuentra EJB valor Manager: ", ne);
-            }
-        }
-
-    }
-    
-    protected void inicializarRolPermisoManager() throws Exception {
-        if (context == null) {
-            try {
-                context = new InitialContext();
-            } catch (NamingException e1) {
-                throw new RuntimeException("No se puede inicializar el contexto", e1);
-            }
-        }
-        if (rolPermisoManager == null) {
-            try {
-
-                rolPermisoManager = (RolPermisoManager) context.lookup("java:app/ComedorService-ejb/RolPermisoManagerImpl");
-            } catch (NamingException ne) {
-                throw new RuntimeException("No se encuentra EJB valor Manager: ", ne);
-            }
-        }
-    }
-        
+//    protected void inicializarRolManager() throws Exception {
+//        if (context == null) {
+//            try {
+//                context = new InitialContext();
+//            } catch (NamingException e1) {
+//                throw new RuntimeException("No se puede inicializar el contexto", e1);
+//            }
+//        }
+//        if (rolManager == null) {
+//            try {
+//
+//                rolManager = (RolManager) context.lookup("java:app/ComedorService-ejb/RolManagerImpl");
+//            } catch (NamingException ne) {
+//                throw new RuntimeException("No se encuentra EJB valor Manager: ", ne);
+//            }
+//        }
+//    }
+//
+//    protected void inicializarPermisoManager() throws Exception {
+//        if (context == null) {
+//            try {
+//                context = new InitialContext();
+//            } catch (NamingException e1) {
+//                throw new RuntimeException("No se puede inicializar el contexto", e1);
+//            }
+//        }
+//        if (permisoManager == null) {
+//            try {
+//
+//                permisoManager = (PermisoManager) context.lookup("java:app/ComedorService-ejb/PermisoManagerImpl");
+//            } catch (NamingException ne) {
+//                throw new RuntimeException("No se encuentra EJB valor Manager: ", ne);
+//            }
+//        }
+//
+//    }
+//    
+//    protected void inicializarRolPermisoManager() throws Exception {
+//        if (context == null) {
+//            try {
+//                context = new InitialContext();
+//            } catch (NamingException e1) {
+//                throw new RuntimeException("No se puede inicializar el contexto", e1);
+//            }
+//        }
+//        if (rolPermisoManager == null) {
+//            try {
+//
+//                rolPermisoManager = (RolPermisoManager) context.lookup("java:app/ComedorService-ejb/RolPermisoManagerImpl");
+//            } catch (NamingException ne) {
+//                throw new RuntimeException("No se encuentra EJB valor Manager: ", ne);
+//            }
+//        }
+//    }
+//        
     
 }
