@@ -76,19 +76,55 @@ public class AutenticacionTokens implements Serializable {
         this.id = id;
     }
 
-    /**
-     * @return the token
-     */
-    public String getToken() {
-        return token;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
-    /**
-     * @param token the token to set
-     */
-    public void setToken(String token) {
-        this.token = token;
+    public static void setSerialVersionUID(long serialVersionUID) {
+        AutenticacionTokens.serialVersionUID = serialVersionUID;
     }
+
+    public String getTypeToken() {
+        return typeToken;
+    }
+
+    public void setTypeToken(String typeToken) {
+        this.typeToken = typeToken;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+
+    public Long getExpiresToken() {
+        return expiresToken;
+    }
+
+    public void setExpiresToken(Long expiresToken) {
+        this.expiresToken = expiresToken;
+    }
+
+    public Timestamp getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Timestamp fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    
 
     /**
      * @return the idUsuario
@@ -118,12 +154,5 @@ public class AutenticacionTokens implements Serializable {
         this.usuario = usuario;
     }
 
-    public String getUpdateToken() {
-        return updateToken;
-    }
-
-    public void setUpdateToken(String updateToken) {
-        this.updateToken = updateToken;
-    }
        
 }
