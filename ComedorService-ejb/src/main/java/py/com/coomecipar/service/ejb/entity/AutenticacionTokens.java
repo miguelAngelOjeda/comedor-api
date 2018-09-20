@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Table(name = "AUTENTICACION_TOKENS", schema = "COOMECIPAR")
 public class AutenticacionTokens implements Serializable {
     private static long serialVersionUID = 85387603479861808L;
-    private static final String SECUENCIA = "seq_autenticacion_token_id";
+    private static final String SECUENCIA = "COOMECIPAR.seq_autenticacion_token_id";
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO,generator = SECUENCIA)

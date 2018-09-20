@@ -6,6 +6,7 @@
 package py.com.coomecipar.service.ejb.entity;
 
 
+import java.sql.Timestamp;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ import javax.persistence.Transient;
 public class Mensaje extends Base {
        
     private static long serialVersionUID = 857603479861808L;
-    private static final String SECUENCIA = "seq_mensaje_id";
+    private static final String SECUENCIA = "COOMECIPAR.seq_mensaje_id";
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO,generator = SECUENCIA)
@@ -50,9 +51,22 @@ public class Mensaje extends Base {
     @Column(name = "RECIBIDO")
     private Boolean recibido;
     
+    @Column(name = "fecha_Mensaje")
+    private Timestamp fechaMensaje;
+    
     @ManyToOne(optional = false)
     @JoinColumn(name = "USUARIO_MENSAJE", referencedColumnName = "id")
     private UsuarioMensaje usuario;
+    
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "TIPO_MENSAJE", referencedColumnName = "id")
+    private TipoMensaje tipoMensaje;
+    
+    @Transient
+    private String imagen;
+    
+    @Transient
+    private String fechaStrMensaje;
        
 
     public Mensaje() {
@@ -150,8 +164,44 @@ public class Mensaje extends Base {
     public void setRecibido(Boolean recibido) {
         this.recibido = recibido;
     }
-   
-    
+
+    /**
+     * @return the tipoMensaje
+     */
+    public TipoMensaje getTipoMensaje() {
+        return tipoMensaje;
+    }
+
+    /**
+     * @param tipoMensaje the tipoMensaje to set
+     */
+    public void setTipoMensaje(TipoMensaje tipoMensaje) {
+        this.tipoMensaje = tipoMensaje;
+    }
+
+    public Timestamp getFechaMensaje() {
+        return fechaMensaje;
+    }
+
+    public void setFechaMensaje(Timestamp fechaMensaje) {
+        this.fechaMensaje = fechaMensaje;
+    }    
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getFechaStrMensaje() {
+        return fechaStrMensaje;
+    }
+
+    public void setFechaStrMensaje(String fechaStrMensaje) {
+        this.fechaStrMensaje = fechaStrMensaje;
+    }
     
             
 }

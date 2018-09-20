@@ -14,6 +14,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.springframework.stereotype.Controller;
+import py.com.coomecipar.service.ejb.manager.DireccionesCorreosManager;
 import py.com.coomecipar.service.ejb.manager.MensajeManager;
 import py.com.coomecipar.service.ejb.manager.UsuarioMensajeManager;
 //import py.com.coomecipar.service.ejb.manager.PermisoManager;
@@ -44,6 +45,8 @@ public class BaseController {
 //    protected PermisoManager permisoManager;
 //    protected RolPermisoManager rolPermisoManager;
     protected MensajeManager mensajeManager;
+    protected DireccionesCorreosManager direccionesCorreosManager;
+    
     
     
     protected void inicializarMensajeManager() throws Exception {
@@ -58,6 +61,24 @@ public class BaseController {
             try {
 
                 mensajeManager = (MensajeManager) context.lookup("java:app/ComedorService-ejb/MensajeManagerImpl");
+            } catch (NamingException ne) {
+                throw new RuntimeException("No se encuentra EJB valor Manager: ", ne);
+            }
+        }
+    }
+    
+    protected void inicializarDireccionesCorreosManager() throws Exception {
+        if (context == null) {
+            try {
+                context = new InitialContext();
+            } catch (NamingException e1) {
+                throw new RuntimeException("No se puede inicializar el contexto", e1);
+            }
+        }
+        if (direccionesCorreosManager == null) {
+            try {
+
+                direccionesCorreosManager = (DireccionesCorreosManager) context.lookup("java:app/ComedorService-ejb/DireccionesCorreosManagerImpl");
             } catch (NamingException ne) {
                 throw new RuntimeException("No se encuentra EJB valor Manager: ", ne);
             }

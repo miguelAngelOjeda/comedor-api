@@ -5,69 +5,36 @@
  */
 package py.com.coomecipar.service.ejb.utils;
 
+import java.util.List;
+
 /**
  *
  * @author Miguel
  */
-public class MensajeDTO<T> {
-    
-    private Long id;    
+public class MensajeDTO<T> {     
     
     private boolean error;
     
-    private String mensaje;
-    
-    private T entidad;
+    private List<T> mensajes;
     
     public MensajeDTO() {
             super();
     }
 
-    /**
-     * @return the error
-     */
     public boolean isError() {
         return error;
     }
 
-    /**
-     * @param error the error to set
-     */
     public void setError(boolean error) {
         this.error = error;
     }
 
-    public String getMensaje() {
-        return mensaje;
+    public List<T> getMensajes() {
+        return mensajes;
     }
 
-    /**
-     * @param mensaje the mensaje to set
-     */
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
-    }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public T getEntidad() {
-        return entidad;
-    }
-
-    public void setEntidad(T entidad) {
-        this.entidad = entidad;
+    public void setMensajes(List<T> mensajes) {
+        this.mensajes = mensajes;
     }
 
     

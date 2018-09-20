@@ -27,7 +27,7 @@ import javax.persistence.Transient;
 public class UsuarioMensaje extends Base {
        
     private static long serialVersionUID = 857603479861808L;
-    private static final String SECUENCIA = "seq_usuario_mensaje_id";
+    private static final String SECUENCIA = "COOMECIPAR.seq_usuario_mensaje_id";
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO,generator = SECUENCIA)
@@ -36,8 +36,11 @@ public class UsuarioMensaje extends Base {
     private Long id;
     
     @Basic(optional = false)
+    @Column(name = "USUARIO_WIN")
+    private String usuarioWin;
+    
     @Column(name = "USUARIO")
-    private String username;
+    private String usuario;
     
     @Column(name = "CLAVE_ACCESO")
     private String password;
@@ -204,32 +207,23 @@ public class UsuarioMensaje extends Base {
         this.especialidad = especialidad;
     }
 
-//    /**
-//     * @return the departamento
-//     */
-//    public Departamento getDepartamento() {
-//        return departamento;
-//    }
-//
-//    /**
-//     * @param departamento the departamento to set
-//     */
-//    public void setDepartamento(Departamento departamento) {
-//        this.departamento = departamento;
-//    }
+    public String getUsuarioWin() {
+        return usuarioWin;
+    }
+
+    public void setUsuarioWin(String usuarioWin) {
+        this.usuarioWin = usuarioWin;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
 
     /**
      * @return the username
      */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * @param username the username to set
-     */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsuario(String usuario) {    
+        this.usuario = usuario;
     }
 
     /**

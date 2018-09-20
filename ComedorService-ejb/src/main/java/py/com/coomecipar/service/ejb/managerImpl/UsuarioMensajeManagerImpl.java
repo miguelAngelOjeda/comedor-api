@@ -32,7 +32,7 @@ public class UsuarioMensajeManagerImpl extends GenericDaoImpl<UsuarioMensaje, Lo
             usuario.setEmail("lanymicole@gmail.com");
             usuario.setNombre("MIGUEL");
             usuario.setSexo("MASCULINO");
-            usuario.setUsername("MOJEDA");
+            //usuario.setUsername("MOJEDA");
             
         } catch (Exception e) {
         }

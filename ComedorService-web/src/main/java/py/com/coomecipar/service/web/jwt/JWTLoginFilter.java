@@ -44,7 +44,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
         // If correct, the successfulAuthentication() method is executed.
         return getAuthenticationManager().authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        account.getUsername(),
+                        account.getUsuarioWin(),
                         account.getPassword(),
                         Collections.EMPTY_LIST
                 )
