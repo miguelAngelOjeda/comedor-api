@@ -19,7 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 import py.com.coomecipar.service.ejb.manager.TokenAuthenticationManager;
 import py.com.coomecipar.service.web.jwtService.TokenAuthenticationService;
-import py.com.coomecipar.service.ejb.managerImpl.TokenAuthenticationServiceImpl;
+import py.com.coomecipar.service.web.jwtService.TokenAuthenticationServiceImpl;
 
 public class JWTAuthenticationFilter extends GenericFilterBean {
 

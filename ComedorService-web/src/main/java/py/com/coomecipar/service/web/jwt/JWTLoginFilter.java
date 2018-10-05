@@ -20,7 +20,7 @@ import javax.naming.Context;
 import org.slf4j.LoggerFactory;
 import py.com.coomecipar.service.ejb.entity.Usuario;
 import py.com.coomecipar.service.web.jwtService.TokenAuthenticationService;
-import py.com.coomecipar.service.ejb.managerImpl.TokenAuthenticationServiceImpl;
+import py.com.coomecipar.service.web.jwtService.TokenAuthenticationServiceImpl;
 
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
