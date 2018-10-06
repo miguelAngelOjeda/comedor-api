@@ -13,7 +13,7 @@ import javax.persistence.*;
  * @author miguel.ojeda
  */
 @Entity
-@Table(name = "AUTENTICACION_TOKENS", schema = "COOMECIPAR")
+@Table(name = "AUTENTICACION_TOKENS")
 public class AutenticacionTokens implements Serializable {
     private static long serialVersionUID = 85387603479861808L;
     private static final String SECUENCIA = "seq_autenticacion_token_id";
