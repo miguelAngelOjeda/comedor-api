@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import py.com.coomecipar.service.web.jwt.JWTAuthenticationEntryPoint;
 import py.com.coomecipar.service.web.jwt.JWTAuthenticationFilter;
@@ -29,6 +30,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public UserSession userSession() {
         return new UserSession();
+    }
+    
+    @Bean
+    public JavaMailSenderImpl mailSender() {
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+
+        javaMailSender.setProtocol("smtp");
+        javaMailSender.setHost("172.16.1.11");
+        javaMailSender.setPort(25);
+        //javaMailSender.s
+        return javaMailSender;
     }
 
     @Override
@@ -51,6 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "login").permitAll()
                 .antMatchers("/servicios/**").permitAll()
                 .antMatchers("/mensajes**").permitAll()
+                .antMatchers("/mensajes/email/**").permitAll()
                 .antMatchers("/mensajes/recibido**").permitAll()
                 .antMatchers("/updateauth/token").permitAll()
                 // Any other request must be authenticated

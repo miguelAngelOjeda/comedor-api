@@ -63,7 +63,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-email</artifactId>
+                <version>1.5</version>
+            </dependency>
+            
             <dependency>
                 <groupId>taglibs</groupId>
                 <artifactId>standard</artifactId>
@@ -106,6 +111,23 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>1.5.5</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>5.0.7.RELEASE</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+            <version>1.5.14.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
@@ -192,10 +214,10 @@
         <resources>
 
             <resource>
-                <directory>src/main/java</directory>
+                <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.xml</include>
+                    <include>**/*.txt</include>
+                    <include>**/*.html</include>
                 </includes>
             </resource>
 

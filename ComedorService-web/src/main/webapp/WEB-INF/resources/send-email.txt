@@ -1,0 +1,9 @@
+Buenas,
+{{mensaje}}.
+
+Le solicitamos que no responda a este correo.
+
+
+Gracias,
+Coomecipar Ltda.
+Tel: 248 8000 | Asuncion
