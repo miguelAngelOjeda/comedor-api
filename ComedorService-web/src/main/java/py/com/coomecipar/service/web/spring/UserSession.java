@@ -47,36 +47,36 @@ public class UserSession implements AuthenticationProvider {
             String userLogin = authentication.getPrincipal().toString();
             String passwordLogin = authentication.getCredentials().toString();
 
-            UsuarioMensaje usuario = usuarioManager.findByUserPass(userLogin, passwordLogin);
-
-            if (usuario != null) {
-                
-                AutenticacionTokens ejTokens = new AutenticacionTokens();
-                ejTokens.setUsuario(userLogin);
-                
-                ejTokens = tokenAuthentication.get(ejTokens);
-                
-                if(ejTokens != null){
-                    tokenAuthentication.delete(ejTokens.getId());
-                }
+//            UsuarioMensaje usuario = usuarioManager.findByUserPass(userLogin, passwordLogin);
+//
+//            if (usuario != null) {
+//                
+//                AutenticacionTokens ejTokens = new AutenticacionTokens();
+//                ejTokens.setUsuario(userLogin);
+//                
+//                ejTokens = tokenAuthentication.get(ejTokens);
+//                
+//                if(ejTokens != null){
+//                    tokenAuthentication.delete(ejTokens.getId());
+//                }
                 
                 User userDetails = new User();
                 userDetails.setId(1L);
                 userDetails.setUsername(userLogin);
-                userDetails.setPassword(passwordLogin);
-                userDetails.setNombre(usuario.getNombre());
-                userDetails.setApellido(usuario.getApellido());
-                userDetails.setEmail(usuario.getEmail());
+//                userDetails.setPassword(passwordLogin);
+//                userDetails.setNombre(usuario.getNombre());
+//                userDetails.setApellido(usuario.getApellido());
+//                userDetails.setEmail(usuario.getEmail());
                // userDetails.setNombreRol(usuario.getRol());
                 
                 Authentication customAuthentication = new UsernamePasswordAuthenticationToken(userDetails,
                         passwordLogin, autoridades);
                 
                 return customAuthentication;
-            } else {
-                System.out.println("Usuario o Contraseña Inválidos.");
-                throw new BadCredentialsException("Usuario o Contraseña Inválidos.");
-            }
+//            } else {
+//                System.out.println("Usuario o Contraseña Inválidos.");
+//                throw new BadCredentialsException("Usuario o Contraseña Inválidos.");
+//            }
 
         } catch (Exception ex) {
             log.error("Error en el login " + ex);

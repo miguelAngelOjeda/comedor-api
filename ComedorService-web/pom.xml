@@ -69,6 +69,8 @@
                 <version>1.5</version>
             </dependency>
             
+            
+            
             <dependency>
                 <groupId>taglibs</groupId>
                 <artifactId>standard</artifactId>
@@ -111,6 +113,11 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.sshd</groupId>
+            <artifactId>sshd-sftp</artifactId>
+            <version>0.11.0</version>
         </dependency>
         <dependency>
             <groupId>javax.mail</groupId>

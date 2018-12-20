@@ -74,7 +74,7 @@ public class MensajeController extends BaseController {
             inicializarDireccionesCorreosManager();
 
             UsuarioMensaje ejUsuaio = new UsuarioMensaje();
-            ejUsuaio.setUsuarioWin(nombre);
+            //ejUsuaio.setUsuarioWin(nombre);
 
             ejUsuaio = usuarioManager.get(ejUsuaio);
 
@@ -114,7 +114,7 @@ public class MensajeController extends BaseController {
                 }
 
                 ejUsuaio.setFechaCreacion(new Timestamp(System.currentTimeMillis()));
-                ejUsuaio.setUsuarioWin(nombre);
+                //ejUsuaio.setUsuarioWin(nombre);
                 ejUsuaio.setNombre(registro[0].toUpperCase());
                 ejUsuaio.setApellido(registro[1].toUpperCase());
 

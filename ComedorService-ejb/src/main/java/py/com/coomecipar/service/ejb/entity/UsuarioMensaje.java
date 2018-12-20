@@ -35,10 +35,6 @@ public class UsuarioMensaje extends Base {
     @Column(name = "id")
     private Long id;
     
-    @Basic(optional = false)
-    @Column(name = "USUARIO_WIN")
-    private String usuarioWin;
-    
     @Column(name = "USUARIO")
     private String usuario;
     
@@ -207,13 +203,6 @@ public class UsuarioMensaje extends Base {
         this.especialidad = especialidad;
     }
 
-    public String getUsuarioWin() {
-        return usuarioWin;
-    }
-
-    public void setUsuarioWin(String usuarioWin) {
-        this.usuarioWin = usuarioWin;
-    }
 
     public String getUsuario() {
         return usuario;

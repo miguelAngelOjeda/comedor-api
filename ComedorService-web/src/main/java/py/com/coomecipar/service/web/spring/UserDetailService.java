@@ -56,7 +56,7 @@ public class UserDetailService implements UserDetailsService {
         //user.setNombreRol(ejPersona.getRol().getNombre());
         user.setId(ejPersona.getId());
         //user.setRol(ejPersona.getRol().getId()+"");
-        user.setUsername(ejPersona.getUsuarioWin());
+        user.setUsername(ejPersona.getUsuario());
         user.setAuthorities(Collections.EMPTY_LIST);
 
         detailsChecker.check(user);
